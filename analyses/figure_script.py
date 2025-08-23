@@ -847,7 +847,7 @@ if figures_to_generate['Supp9']:
     
      # Column titles + colored spines
     color_subplot_spines(axs, col_colors=[low_mut_color, high_mut_color], col_labels=["Low mutation rate", "High mutation rate"],
-                         row_colors=[mod_affinity_color, min_affinity_color], row_labels=["Moderate affinity", "Minimal affinity"], )
+                         row_colors=[min_affinity_color, mod_affinity_color], row_labels=["Minimal affinity", "Moderate affinity"], )
     
     labels = ['A)', 'B)', 'C)', 'D)']
     axes_labels(labels, axs)
