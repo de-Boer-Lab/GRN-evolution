@@ -36,11 +36,11 @@ ALL_FIGS = ["Fig2", # Static env, fitness
             "Supp3", # All fitness
             "Supp4", # All complexity
             "Supp5", # Changing env example
-            "Supp6", # Changing env, no recombination
-            "Supp7", # Changing env, recombination
-            "Supp8", # Robustness, changing env
-            "Supp9", # Correlations
-            "Supp10" # Generations to regain fitness
+            "Supp6", # Generations to regain fitness
+            "Supp7", # Changing env, no recombination
+            "Supp8", # Changing env, recombination
+            "Supp9", # Robustness, changing env
+            "Supp10" # Correlations
             ]
 
 low_mut_color = "#ff9896"
@@ -684,124 +684,6 @@ if figures_to_generate['Supp5']:
     fig.savefig(os.path.join(figure_directory, 'Supp5.png'), dpi=1200)
     
 if figures_to_generate['Supp6']:
-    # Changing env, no recombination 
-    figsize = auto_figsize(nrows=2, ncols=2, panel_size=4, aspect=0.75)
-    fig, axs = plt.subplots(2, 2, figsize=figsize, sharex=True, sharey=True)
-    fig.text(x=0.6/figsize[0]/2, y=0.5, s="Complexity (1 - Gini)", ha='left', va='center', size='large', rotation=90)
-    
-    plot_sem(['testE'], ax=axs[0,0], directory=changing_env_directory, plot_comps=True, colors=[changing_env_color])
-    plot_sem(['testE'], ax=axs[0,0], directory=static_env_directory, plot_comps=True, colors=[static_env_color])
-    plot_sem(['testF'], ax=axs[0,1], directory=changing_env_directory, plot_comps=True, colors=[changing_env_color])
-    plot_sem(['testF'], ax=axs[0,1], directory=static_env_directory, plot_comps=True, colors=[static_env_color])
-    plot_sem(['testA'], ax=axs[1,0], directory=changing_env_directory, plot_comps=True, colors=[changing_env_color])
-    plot_sem(['testA'], ax=axs[1,0], directory=static_env_directory, plot_comps=True, colors=[static_env_color])
-    plot_sem(['testB'], ax=axs[1,1], directory=changing_env_directory, plot_comps=True, colors=[changing_env_color])
-    plot_sem(['testB'], ax=axs[1,1], directory=static_env_directory, plot_comps=True, colors=[static_env_color])
-    
-    axs[0,0].vlines(300000,ymin=-2.22724586064651, ymax= 102.22724586064651, linestyle='dashed', color='black', alpha=0.5)
-    axs[1,0].vlines(300000,ymin=-2.22724586064651, ymax= 102.22724586064651, linestyle='dashed', color='black', alpha=0.5)
-    axs[0,1].vlines(150000,ymin=-2.22724586064651, ymax= 102.22724586064651, linestyle='dashed', color='black', alpha=0.5)
-    axs[1,1].vlines(150000,ymin=-2.22724586064651, ymax= 102.22724586064651, linestyle='dashed', color='black', alpha=0.5)
-    axs[0,0].set_xlim(1e5, 1.1e6)
-    
-    labels = ['A)', 'B)', 'C)', 'D)']
-    axes_labels(labels, axs)
-    
-    color_subplot_spines(axs, col_colors=[low_mut_color,high_mut_color], col_labels=['Low mutation rate', 'High mutation rate'],
-                         row_colors=[min_affinity_color, mod_affinity_color], row_labels=["Minimal affinity", "Moderate affinity"])
-    
-    custom_lines = [Line2D([0], [0], color=changing_env_color, linewidth=2), Line2D([0], [0], color=static_env_color, linewidth=2)]
-    plt.legend(custom_lines, ['Changing', 'Static'], title='Environment', loc='best')
-    fig.supxlabel('Generations')
-    
-    fig.subplots_adjust(hspace=hspace, wspace=wspace)
-
-    # Save
-    fig.savefig(os.path.join(figure_directory, 'Supp6.png'), dpi=1200)
-    plt.close()   
-    
-if figures_to_generate['Supp7']:
-    #Changing env, recombination
-    figsize = auto_figsize(nrows=2, ncols=2, panel_size=4, aspect=0.75)
-    fig, axs = plt.subplots(2, 2, figsize=figsize, sharex=True, sharey=True)
-    fig.text(x=0.6/figsize[0]/2, y=0.5, s="Complexity (1 - Gini)", ha='left', va='center', size='large', rotation=90)
-    
-    plot_sem(['testG'], ax=axs[0,0], directory=changing_env_directory, plot_comps=True, colors=[changing_env_color])
-    plot_sem(['testG'], ax=axs[0,0], directory=static_env_directory, plot_comps=True, colors=[static_env_color])
-    plot_sem(['testH'], ax=axs[0,1], directory=changing_env_directory, plot_comps=True, colors=[changing_env_color])
-    plot_sem(['testH'], ax=axs[0,1], directory=static_env_directory, plot_comps=True, colors=[static_env_color])
-    plot_sem(['testC'], ax=axs[1,0], directory=changing_env_directory, plot_comps=True, colors=[changing_env_color])
-    plot_sem(['testC'], ax=axs[1,0], directory=static_env_directory, plot_comps=True, colors=[static_env_color])
-    plot_sem(['testD'], ax=axs[1,1], directory=changing_env_directory, plot_comps=True, colors=[changing_env_color])
-    plot_sem(['testD'], ax=axs[1,1], directory=static_env_directory, plot_comps=True, colors=[static_env_color])
-    
-    axs[0,0].vlines(300000,ymin=-2.22724586064651, ymax= 102.22724586064651, linestyle='dashed', color='black', alpha=0.5)
-    axs[1,0].vlines(300000,ymin=-2.22724586064651, ymax= 102.22724586064651, linestyle='dashed', color='black', alpha=0.5)
-    axs[0,1].vlines(150000,ymin=-2.22724586064651, ymax= 102.22724586064651, linestyle='dashed', color='black', alpha=0.5)
-    axs[1,1].vlines(150000,ymin=-2.22724586064651, ymax= 102.22724586064651, linestyle='dashed', color='black', alpha=0.5)
-    axs[0,0].set_xlim(1e5, 1.1e6)
-    
-    labels = ['A)', 'B)', 'C)', 'D)']
-    axes_labels(labels, axs)
-    
-    color_subplot_spines(axs, col_colors=[low_mut_color,high_mut_color], col_labels=['Low mutation rate', 'High mutation rate'],
-                         row_colors=[min_affinity_color, mod_affinity_color], row_labels=["Minimal affinity", "Moderate affinity"])
-    
-        
-    custom_lines = [Line2D([0], [0], color=changing_env_color, linewidth=2), Line2D([0], [0], color=static_env_color, linewidth=2)]
-    plt.legend(custom_lines, ['Changing', 'Static'], title='Environment', loc='best')
-    fig.supxlabel('Generations')
-    fig.subplots_adjust(hspace=hspace, wspace=wspace)
-
-    # Save
-    fig.savefig(os.path.join(figure_directory, 'Supp7.png'), dpi=1200)
-    plt.close()    
-    
-if figures_to_generate['Supp8']:
-    # Robustness, changing env
-    figsize = auto_figsize(nrows=2, ncols=2, panel_size=4, aspect=0.75)
-    fig, axs = plt.subplots(2, 2, figsize=figsize, sharex=True, sharey=True)
-    fig.text(x=0.6/figsize[0]/2, y=0.5, s="Robustness", ha='left', va='center', size='large', rotation=90)
-        
-    plot_robustness(robustness_dataframe(load_robustness_data('testA', robustness_directory=robustness_directory / "changing-environment" / 'robustness-change'), generations[5:]), axs[0,0], color=no_recombination_color)
-    plot_robustness(robustness_dataframe(load_robustness_data('testC', robustness_directory=robustness_directory / "changing-environment" / 'robustness-change'), generations[5:]), axs[0,0], color=recombination_color)
-    plot_robustness(robustness_dataframe(load_robustness_data('testB', robustness_directory=robustness_directory / "changing-environment" / 'robustness-change'), generations[2:]), axs[0,1], color=no_recombination_color)
-    plot_robustness(robustness_dataframe(load_robustness_data('testD', robustness_directory=robustness_directory / "changing-environment" / 'robustness-change'), generations[2:]), axs[0,1], color=recombination_color)
-    plot_robustness(robustness_dataframe(load_robustness_data('testE', robustness_directory=robustness_directory / "changing-environment" / 'robustness-change'), generations[5:]), axs[1,0], color=no_recombination_color)
-    plot_robustness(robustness_dataframe(load_robustness_data('testG', robustness_directory=robustness_directory / "changing-environment" / 'robustness-change'), generations[5:]), axs[1,0], color=recombination_color)
-    plot_robustness(robustness_dataframe(load_robustness_data('testF', robustness_directory=robustness_directory / "changing-environment" / 'robustness-change'), generations[2:]), axs[1,1], color=no_recombination_color)
-    plot_robustness(robustness_dataframe(load_robustness_data('testH', robustness_directory=robustness_directory / "changing-environment" / 'robustness-change'), generations[2:]), axs[1,1], color=recombination_color)
-    
-    # Vertical lines
-    ymin, ymax = axs[0,0].get_ylim()
-    axs[0,0].vlines(300000,ymin=ymin, ymax= ymax, linestyle='dashed', color='black', alpha=0.5)
-    axs[1,0].vlines(300000,ymin=ymin, ymax= ymax, linestyle='dashed', color='black', alpha=0.5)
-    axs[0,1].vlines(150000,ymin=ymin, ymax= ymax, linestyle='dashed', color='black', alpha=0.5)
-    axs[1,1].vlines(150000,ymin=ymin, ymax= ymax, linestyle='dashed', color='black', alpha=0.5)
-    
-     # Column titles + colored spines
-    color_subplot_spines(axs, col_colors=[low_mut_color, high_mut_color], col_labels=["Low mutation rate", "High mutation rate"],
-                         row_colors=[mod_affinity_color, min_affinity_color], row_labels=["Moderate affinity", "Minimal affinity"], )
-    
-    labels = ['A)', 'B)', 'C)', 'D)']
-    axes_labels(labels, axs)
-    
-    custom_lines = [Line2D([0], [0], color=recombination_color, linewidth=2), Line2D([0], [0], color=no_recombination_color, linewidth=2)]
-    plt.legend(custom_lines, ['Yes', 'No'], title='Recombination', loc='best')
-    fig.supxlabel('Generations')
-    fig.subplots_adjust(hspace=hspace, wspace=wspace)
-    
-    # Save
-    fig.savefig(os.path.join(figure_directory, 'Supp8.png'), dpi=1200)
-    plt.close()
-    
-if figures_to_generate['Supp9']:
-    # Violin plot for correlation data
-    plot_correlation_data(['testA', 'testB', 'testC', 'testD', 'testE', 'testF', 
-                           'testG', 'testH', 'testI', 'testJ', 'testK', 'testL'],
-                          robustness_directory / "static-environment", figure_directory / 'Supp9.png')
-    
-if figures_to_generate['Supp10']:
     # Similar violin plot for time to regain original fitness
     data = pd.DataFrame({
         "Test": ['testA', 'testB', 'testC', 'testD', 'testE', 'testF', 
@@ -864,5 +746,124 @@ if figures_to_generate['Supp10']:
     add_group_legend(ax_main, "Recombination",            recombination_items, anchor_y=0.7 )
     add_group_legend(ax_main, "Mutation rate",            mut_rate_items, anchor_y=0.46)
     
-    plt.savefig(os.path.join(figure_directory, 'Supp10.png'), dpi=1200)
+    plt.savefig(os.path.join(figure_directory, 'Supp6.png'), dpi=1200)
     plt.close()
+        
+if figures_to_generate['Supp7']:
+    # Changing env, no recombination 
+    figsize = auto_figsize(nrows=2, ncols=2, panel_size=4, aspect=0.75)
+    fig, axs = plt.subplots(2, 2, figsize=figsize, sharex=True, sharey=True)
+    fig.text(x=0.6/figsize[0]/2, y=0.5, s="Complexity (1 - Gini)", ha='left', va='center', size='large', rotation=90)
+    
+    plot_sem(['testE'], ax=axs[0,0], directory=changing_env_directory, plot_comps=True, colors=[changing_env_color])
+    plot_sem(['testE'], ax=axs[0,0], directory=static_env_directory, plot_comps=True, colors=[static_env_color])
+    plot_sem(['testF'], ax=axs[0,1], directory=changing_env_directory, plot_comps=True, colors=[changing_env_color])
+    plot_sem(['testF'], ax=axs[0,1], directory=static_env_directory, plot_comps=True, colors=[static_env_color])
+    plot_sem(['testA'], ax=axs[1,0], directory=changing_env_directory, plot_comps=True, colors=[changing_env_color])
+    plot_sem(['testA'], ax=axs[1,0], directory=static_env_directory, plot_comps=True, colors=[static_env_color])
+    plot_sem(['testB'], ax=axs[1,1], directory=changing_env_directory, plot_comps=True, colors=[changing_env_color])
+    plot_sem(['testB'], ax=axs[1,1], directory=static_env_directory, plot_comps=True, colors=[static_env_color])
+    
+    axs[0,0].vlines(300000,ymin=-2.22724586064651, ymax= 102.22724586064651, linestyle='dashed', color='black', alpha=0.5)
+    axs[1,0].vlines(300000,ymin=-2.22724586064651, ymax= 102.22724586064651, linestyle='dashed', color='black', alpha=0.5)
+    axs[0,1].vlines(150000,ymin=-2.22724586064651, ymax= 102.22724586064651, linestyle='dashed', color='black', alpha=0.5)
+    axs[1,1].vlines(150000,ymin=-2.22724586064651, ymax= 102.22724586064651, linestyle='dashed', color='black', alpha=0.5)
+    axs[0,0].set_xlim(1e5, 1.1e6)
+    
+    labels = ['A)', 'B)', 'C)', 'D)']
+    axes_labels(labels, axs)
+    
+    color_subplot_spines(axs, col_colors=[low_mut_color,high_mut_color], col_labels=['Low mutation rate', 'High mutation rate'],
+                         row_colors=[min_affinity_color, mod_affinity_color], row_labels=["Minimal affinity", "Moderate affinity"])
+    
+    custom_lines = [Line2D([0], [0], color=changing_env_color, linewidth=2), Line2D([0], [0], color=static_env_color, linewidth=2)]
+    plt.legend(custom_lines, ['Changing', 'Static'], title='Environment', loc='best')
+    fig.supxlabel('Generations')
+    
+    fig.subplots_adjust(hspace=hspace, wspace=wspace)
+
+    # Save
+    fig.savefig(os.path.join(figure_directory, 'Supp7.png'), dpi=1200)
+    plt.close()   
+    
+if figures_to_generate['Supp8']:
+    #Changing env, recombination
+    figsize = auto_figsize(nrows=2, ncols=2, panel_size=4, aspect=0.75)
+    fig, axs = plt.subplots(2, 2, figsize=figsize, sharex=True, sharey=True)
+    fig.text(x=0.6/figsize[0]/2, y=0.5, s="Complexity (1 - Gini)", ha='left', va='center', size='large', rotation=90)
+    
+    plot_sem(['testG'], ax=axs[0,0], directory=changing_env_directory, plot_comps=True, colors=[changing_env_color])
+    plot_sem(['testG'], ax=axs[0,0], directory=static_env_directory, plot_comps=True, colors=[static_env_color])
+    plot_sem(['testH'], ax=axs[0,1], directory=changing_env_directory, plot_comps=True, colors=[changing_env_color])
+    plot_sem(['testH'], ax=axs[0,1], directory=static_env_directory, plot_comps=True, colors=[static_env_color])
+    plot_sem(['testC'], ax=axs[1,0], directory=changing_env_directory, plot_comps=True, colors=[changing_env_color])
+    plot_sem(['testC'], ax=axs[1,0], directory=static_env_directory, plot_comps=True, colors=[static_env_color])
+    plot_sem(['testD'], ax=axs[1,1], directory=changing_env_directory, plot_comps=True, colors=[changing_env_color])
+    plot_sem(['testD'], ax=axs[1,1], directory=static_env_directory, plot_comps=True, colors=[static_env_color])
+    
+    axs[0,0].vlines(300000,ymin=-2.22724586064651, ymax= 102.22724586064651, linestyle='dashed', color='black', alpha=0.5)
+    axs[1,0].vlines(300000,ymin=-2.22724586064651, ymax= 102.22724586064651, linestyle='dashed', color='black', alpha=0.5)
+    axs[0,1].vlines(150000,ymin=-2.22724586064651, ymax= 102.22724586064651, linestyle='dashed', color='black', alpha=0.5)
+    axs[1,1].vlines(150000,ymin=-2.22724586064651, ymax= 102.22724586064651, linestyle='dashed', color='black', alpha=0.5)
+    axs[0,0].set_xlim(1e5, 1.1e6)
+    
+    labels = ['A)', 'B)', 'C)', 'D)']
+    axes_labels(labels, axs)
+    
+    color_subplot_spines(axs, col_colors=[low_mut_color,high_mut_color], col_labels=['Low mutation rate', 'High mutation rate'],
+                         row_colors=[min_affinity_color, mod_affinity_color], row_labels=["Minimal affinity", "Moderate affinity"])
+    
+        
+    custom_lines = [Line2D([0], [0], color=changing_env_color, linewidth=2), Line2D([0], [0], color=static_env_color, linewidth=2)]
+    plt.legend(custom_lines, ['Changing', 'Static'], title='Environment', loc='best')
+    fig.supxlabel('Generations')
+    fig.subplots_adjust(hspace=hspace, wspace=wspace)
+
+    # Save
+    fig.savefig(os.path.join(figure_directory, 'Supp8.png'), dpi=1200)
+    plt.close()    
+    
+if figures_to_generate['Supp9']:
+    # Robustness, changing env
+    figsize = auto_figsize(nrows=2, ncols=2, panel_size=4, aspect=0.75)
+    fig, axs = plt.subplots(2, 2, figsize=figsize, sharex=True, sharey=True)
+    fig.text(x=0.6/figsize[0]/2, y=0.5, s="Robustness", ha='left', va='center', size='large', rotation=90)
+        
+    plot_robustness(robustness_dataframe(load_robustness_data('testA', robustness_directory=robustness_directory / "changing-environment" / 'robustness-change'), generations[5:]), axs[1,0], color=no_recombination_color)
+    plot_robustness(robustness_dataframe(load_robustness_data('testC', robustness_directory=robustness_directory / "changing-environment" / 'robustness-change'), generations[5:]), axs[1,0], color=recombination_color)
+    plot_robustness(robustness_dataframe(load_robustness_data('testB', robustness_directory=robustness_directory / "changing-environment" / 'robustness-change'), generations[2:]), axs[1,1], color=no_recombination_color)
+    plot_robustness(robustness_dataframe(load_robustness_data('testD', robustness_directory=robustness_directory / "changing-environment" / 'robustness-change'), generations[2:]), axs[1,1], color=recombination_color)
+    plot_robustness(robustness_dataframe(load_robustness_data('testE', robustness_directory=robustness_directory / "changing-environment" / 'robustness-change'), generations[5:]), axs[0,0], color=no_recombination_color)
+    plot_robustness(robustness_dataframe(load_robustness_data('testG', robustness_directory=robustness_directory / "changing-environment" / 'robustness-change'), generations[5:]), axs[0,0], color=recombination_color)
+    plot_robustness(robustness_dataframe(load_robustness_data('testF', robustness_directory=robustness_directory / "changing-environment" / 'robustness-change'), generations[2:]), axs[0,1], color=no_recombination_color)
+    plot_robustness(robustness_dataframe(load_robustness_data('testH', robustness_directory=robustness_directory / "changing-environment" / 'robustness-change'), generations[2:]), axs[0,1], color=recombination_color)
+    
+    # Vertical lines
+    ymin, ymax = axs[0,0].get_ylim()
+    axs[0,0].vlines(300000,ymin=ymin, ymax= ymax, linestyle='dashed', color='black', alpha=0.5)
+    axs[1,0].vlines(300000,ymin=ymin, ymax= ymax, linestyle='dashed', color='black', alpha=0.5)
+    axs[0,1].vlines(150000,ymin=ymin, ymax= ymax, linestyle='dashed', color='black', alpha=0.5)
+    axs[1,1].vlines(150000,ymin=ymin, ymax= ymax, linestyle='dashed', color='black', alpha=0.5)
+    
+     # Column titles + colored spines
+    color_subplot_spines(axs, col_colors=[low_mut_color, high_mut_color], col_labels=["Low mutation rate", "High mutation rate"],
+                         row_colors=[mod_affinity_color, min_affinity_color], row_labels=["Moderate affinity", "Minimal affinity"], )
+    
+    labels = ['A)', 'B)', 'C)', 'D)']
+    axes_labels(labels, axs)
+    
+    custom_lines = [Line2D([0], [0], color=recombination_color, linewidth=2), Line2D([0], [0], color=no_recombination_color, linewidth=2)]
+    plt.legend(custom_lines, ['Yes', 'No'], title='Recombination', loc='best')
+    fig.supxlabel('Generations')
+    fig.subplots_adjust(hspace=hspace, wspace=wspace)
+    
+    # Save
+    fig.savefig(os.path.join(figure_directory, 'Supp9.png'), dpi=1200)
+    plt.close()
+    
+if figures_to_generate['Supp10']:
+    # Violin plot for correlation data
+    plot_correlation_data(['testA', 'testB', 'testC', 'testD', 'testE', 'testF', 
+                           'testG', 'testH', 'testI', 'testJ', 'testK', 'testL'],
+                          robustness_directory / "static-environment", figure_directory / 'Supp10.png')
+    
