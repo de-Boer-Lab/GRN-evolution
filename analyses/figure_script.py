@@ -131,7 +131,7 @@ def plot_sem(tests, ax, directory, plot_comps = False, plot_fits = False, colors
         fit_dfs = []
         
         for rep_name in replicates: 
-            pattern = str(Path(directory) / test / f"{test}{rep_name}*.pkl")
+            pattern = str(Path(directory) / f"{test}{rep_name}*.pkl")
             files = natsorted(
                 filter(os.path.isfile, glob.glob(pattern)), alg = ns.IGNORECASE
             )
