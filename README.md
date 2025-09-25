@@ -123,5 +123,10 @@ or
 python analyses/figure_script.py Fig3 Supp2
 ```
 
+There are also scripts available to generate an animation of the GRNs as they evolve. These scripts are located in `analyses/animations`. To create an animation, you will need Heatmaps and checkpoint data for at least two replicates (ideally a sexually reproducing one and an asexually reproducing one). The scripts should be run in the following order: 
+1. getFitnessPlots.py
+2. combine-plots2.py
+3. animate-images.py
+
 ## Acknowledgements
 Built using [DEAP](https://github.com/DEAP/deap) (Distributed Evolutionary Algorithms in Python)
